@@ -6,7 +6,7 @@
 #    By: Niko <niko.caron90@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/24 13:39:41 by Niko              #+#    #+#              #
-#    Updated: 2017/02/24 13:39:48 by Niko             ###   ########.fr        #
+#    Updated: 2017/02/24 23:34:42 by Niko             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,17 +41,17 @@ def display_location(info)
 end
 
 if ARGV.size != 1
-  display_colorized("Pease try again with 1 argument.", RED)
+  display_colorized('Please try again with 1 argument.', RED)
   exit
 end
 
-file = ARGV[0]
+file_loaded = ARGV[0]
 
 login_location = []
 
 print 'LOADING: '
 
-File.open(file, 'r') do |file|
+File.open(file_loaded, 'r') do |file|
   file.each do |file_login|
     user_exists = 1
     endpoint = "/v2/locations/?user_id=#{file_login}&filter[active]=true"
@@ -76,8 +76,10 @@ File.open(file, 'r') do |file|
   puts "\n" * 2
 end
 
+system('clear') || system('cls')
+
 if login_location.empty?
-  display_colorized("File is empty.".ljust(25), RED)
+  display_colorized('File is empty.'.ljust(25), RED)
 else
   display_location(login_location)
 end
